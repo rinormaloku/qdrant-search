@@ -1,0 +1,49 @@
+{
+  "name": "qdrant-search-mcp-server",
+  "version": "0.1.1",
+  "description": "MCP server to search qdrant database",
+  "type": "module",
+  "main": "build/index.js",
+  "bin": {
+    "qdrant-search-mcp-server": "build/index.js"
+  },
+  "scripts": {
+    "build": "tsc && chmod +x build/index.js",
+    "start": "node build/index.js",
+    "dev": "tsc -w",
+    "clean": "rm -rf build",
+    "prepare": "npm run build",
+    "test": "echo \"No tests yet\""
+  },
+  "keywords": [
+    "mcp",
+    "qdrant",
+    "vector-database",
+    "embeddings",
+    "claude",
+    "openai"
+  ],
+  "author": "Rinor Maloku <rinormaloku37@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@qdrant/js-client-rest": "^1.14.0",
+    "fastmcp": "^1.27.6",
+    "openai": "^4.98.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "build",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rinormaloku/qdrant-search.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rinormaloku/qdrant-search/issues"
+  },
+  "homepage": "https://github.com/rinormaloku/qdrant-search#readme"
+}
