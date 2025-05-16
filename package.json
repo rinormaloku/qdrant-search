@@ -1,6 +1,6 @@
 {
   "name": "qdrant-search-mcp-server",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "MCP server to search qdrant database",
   "type": "module",
   "main": "build/index.js",
@@ -28,7 +28,8 @@
   "dependencies": {
     "@qdrant/js-client-rest": "^1.14.0",
     "fastmcp": "^1.27.6",
-    "openai": "^4.98.0"
+    "openai": "^4.98.0",
+    "yargs": "^17.7.2"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -45,5 +46,8 @@
   "bugs": {
     "url": "https://github.com/rinormaloku/qdrant-search/issues"
   },
-  "homepage": "https://github.com/rinormaloku/qdrant-search#readme"
+  "homepage": "https://github.com/rinormaloku/qdrant-search#readme",
+  "devDependencies": {
+    "@types/yargs": "^17.0.33"
+  }
 }

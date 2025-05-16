@@ -4,7 +4,7 @@ A Model Context Protocol (MCP) server for enhanced Qdrant vector database functi
 
 ## Features
 
-- **qdrantSearch**: Searches a qdrant vector database collection
+- **qdrantSearch** (default): Searches a Qdrant vector database collection — name and description can be overridden via `--name` and `--description` flags
 
 ## Installation
 
@@ -30,8 +30,17 @@ OPENAI_MODEL=text-embedding-3-large
 
 Meanwhile, collections are provided directly in the command line, or the defaults will be used if nothing is specified.
 
-```
+```bash
 npx qdrant-search-mcp-server --collections=istio,gloo-mesh-enterprise
+```
+
+Additionally, you can customize the MCP tool metadata at launch:
+
+```bash
+npx qdrant-search-mcp-server \
+  --collections=istio,gloo-mesh-enterprise \
+  --name=mySearchTool \
+  --description="Custom Qdrant search tool"  # override default name/description
 ```
 
 ## Usage with Claude
@@ -43,11 +52,11 @@ To use this MCP server with Claude, add it to your MCP settings configuration fi
   "mcpServers": {
     "qdrantSearch": {
       "command": "npx",
-      "args": ["qdrant-search-mcp-server"],
+      "args": ["qdrant-search-mcp-server --collections=istio,gloo-mesh-enterprise --name=mySearchTool --description='Search Documentation related to Istio and Gloo Mesh'"],
       "env": {
         "QDRANT_URL": "http://localhost:6333",
-        "QDRANT_API_KEY": "http://localhost:6333",
-        "QDRANT_API_KEY": "your_api_key_if_needed",
+        "QDRANT_API_KEY": "your_api_key",
+        "OPENAPI_API_KEY": "your_api_key",
       }
     }
   }
@@ -66,7 +75,8 @@ To use this MCP server with Visual Studio Code, you can add it to your `mcp.json
       "args": ["qdrant-search-mcp-server"],
       "env": {
         "QDRANT_URL": "http://localhost:6333",
-        "QDRANT_API_KEY": "your_api_key_if_needed"
+        "QDRANT_API_KEY": "your_api_key",
+        "OPENAPI_API_KEY": "your_api_key",
       }
     }
   }

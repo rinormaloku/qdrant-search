@@ -1,18 +1,32 @@
 #!/usr/bin/env node
 
 import { createServer } from "./server.js";
+import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers';
 
-// Parse command line arguments for collections
-// Expected format: --collections=collection1,collection2,collection3
-const collectionsArg = process.argv.find(arg => arg.startsWith('--collections='));
-const collections = collectionsArg
-  ? collectionsArg.replace('--collections=', '').split(',')
-  : [];
+const argv = yargs(hideBin(process.argv))
+  .option('collections', {
+    type: 'string',
+    description: 'Comma-separated list of collections to search',
+  })
+  .option('name', {
+    type: 'string',
+    description: 'Name for the MCP tool',
+  })
+  .option('description', {
+    type: 'string',
+    description: 'Description for the MCP tool',
+  })
+  .parseSync();
 
-// Create a server with collections from arguments or defaults
+const collections = argv.collections ? argv.collections.split(',') : [];
+const { name, description } = argv;
+
 const server = createServer({
   collections,
-  transportType: "stdio",  // Using standard I/O for communication
+  name,
+  description,
+  transportType: "stdio",
 });
 
 server.start();

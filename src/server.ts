@@ -9,6 +9,8 @@ interface ServerOptions {
   collections: string[];
   transportType?: "stdio" | "http";
   port?: number;
+  name?: string;
+  description?: string;
 }
 
 export function createServer(options: ServerOptions = {collections: []}) {
@@ -19,8 +21,8 @@ export function createServer(options: ServerOptions = {collections: []}) {
   });
 
   server.addTool({
-    name: "qdrantSearch",
-    description: "Searches a qdrant vector database collection",
+    name: options.name ?? "qdrantSearch",
+    description: options.description ?? "Searches a qdrant vector database collection",
     parameters: z.object({
       query: z.string().describe("The search query to use"),
       collection: createQdrantCollectionsEnum(options.collections).describe("The name of the collection to search within"),
