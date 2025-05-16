@@ -1,4 +1,4 @@
-# Better Qdrant MCP Server
+# Qdrant Search MCP Server
 
 A Model Context Protocol (MCP) server for enhanced Qdrant vector database functionality. This server provides a tool for searching the Qdrant vector database.
 
