@@ -1,6 +1,12 @@
 import { z } from "zod";
 
-export const QdrantCollections = z.enum([
+export function createQdrantCollectionsEnum(collections: string[]) {
+  const collectionsToUse = collections.length > 0 ? collections : defaultCollections;
+  return z.enum(collectionsToUse as [string, ...string[]]);
+}
+
+// Default collections for backward compatibility
+const defaultCollections = [
   "ambient",
   "argo",
   "argo-rollouts",
@@ -20,4 +26,4 @@ export const QdrantCollections = z.enum([
   "github-istio",
   "github-solo-projects",
   "github-solo-reference-architectures",
-]);
+];
