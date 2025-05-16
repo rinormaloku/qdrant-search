@@ -1,47 +1,38 @@
 # Better Qdrant MCP Server
 
-A Model Context Protocol (MCP) server for enhanced Qdrant vector database functionality. This server provides tools for managing Qdrant collections, adding documents, and performing semantic searches.
+A Model Context Protocol (MCP) server for enhanced Qdrant vector database functionality. This server provides a tool for searching the Qdrant vector database.
 
 ## Features
 
-- **List Collections**: View all available Qdrant collections
-- **Add Documents**: Process and add documents to a Qdrant collection with various embedding services
-- **Search**: Perform semantic searches across your vector database
-- **Delete Collection**: Remove collections from your Qdrant database
+- **qdrantSearch**: Searches a qdrant vector database collection
 
 ## Installation
 
-```bash
-npm install -g better-qdrant-mcp-server
-```
-
-Or use it directly with npx:
+You can use it directly with `npx` without global installation:
 
 ```bash
-npx better-qdrant-mcp-server
+npx qdrant-search-mcp-server
 ```
 
-## Configuration
+### Configuring with `npx`
 
-The server uses environment variables for configuration. You can set these in a `.env` file in your project root:
+When using `npx`, the server will load configuration from a `.env` file in the current directory if present. You can configure these environment variables:
 
 ```
-# Qdrant Configuration
-QDRANT_URL=http://localhost:6333
-QDRANT_API_KEY=your_api_key_if_needed
+QDRANT_URL=https://qdrant.is.solo.io
+QDRANT_API_KEY=add your key
 
-# Embedding Service API Keys
-OPENAI_API_KEY=your_openai_api_key
-OPENROUTER_API_KEY=your_openrouter_api_key
-OLLAMA_ENDPOINT=http://localhost:11434
+# As long as the embedding service is openai api compatible, you can use them also.
+OPENAI_API_KEY=add your key
+OPENAI_ENDPOINT=https://api.openai.com/v1
+OPENAI_MODEL=text-embedding-3-large
 ```
 
-## Supported Embedding Services
+Meanwhile, collections are provided directly in the command line, or the defaults will be used if nothing is specified.
 
-- **OpenAI**: Requires an API key
-- **OpenRouter**: Requires an API key
-- **Ollama**: Local embedding models (default endpoint: http://localhost:11434)
-- **FastEmbed**: Local embedding models
+```
+npx qdrant-search-mcp-server --collections=istio,gloo-mesh-enterprise
+```
 
 ## Usage with Claude
 
@@ -50,82 +41,28 @@ To use this MCP server with Claude, add it to your MCP settings configuration fi
 ```json
 {
   "mcpServers": {
-    "better-qdrant": {
+    "qdrantSearch": {
       "command": "npx",
-      "args": ["better-qdrant-mcp-server"],
+      "args": ["qdrant-search-mcp-server"],
       "env": {
         "QDRANT_URL": "http://localhost:6333",
+        "QDRANT_API_KEY": "http://localhost:6333",
         "QDRANT_API_KEY": "your_api_key_if_needed",
-        "DEFAULT_EMBEDDING_SERVICE": "ollama",
-        "OPENAI_API_KEY": "your_openai_api_key",
-        "OPENAI_ENDPOINT": "https://api.openai.com/v1",
-        "OPENROUTER_API_KEY": "your_openrouter_api_key",
-        "OPENROUTER_ENDPOINT": "https://api.openrouter.com/v1",
-        "OLLAMA_ENDPOINT": "http://localhost:11434",
-        "OLLAMA_MODEL": "nomic-embed-text"
       }
     }
   }
 }
 ```
 
-### Example Commands
-
-#### List Collections
+#### qdrantSearch
 
 ```
 use_mcp_tool
-server_name: better-qdrant
-tool_name: list_collections
-arguments: {}
-```
-
-#### Add Documents
-
-```
-use_mcp_tool
-server_name: better-qdrant
-tool_name: add_documents
-arguments: {
-  "filePath": "/path/to/your/document.pdf",
-  "collection": "my-collection",
-  "embeddingService": "openai",
-  "chunkSize": 1000,
-  "chunkOverlap": 200
-}
-```
-
-#### Search
-
-```
-use_mcp_tool
-server_name: better-qdrant
-tool_name: search
+server_name: qdrantSearch
+tool_name: qdrantSearch
 arguments: {
   "query": "your search query",
   "collection": "my-collection",
-  "embeddingService": "openai",
   "limit": 5
 }
 ```
-
-#### Delete Collection
-
-```
-use_mcp_tool
-server_name: better-qdrant
-tool_name: delete_collection
-arguments: {
-  "collection": "my-collection"
-}
-```
-
-## Requirements
-
-- Node.js >= 18.0.0
-- A running Qdrant server (local or remote)
-- API keys for the embedding services you want to use
-
-## License
-
-MIT
