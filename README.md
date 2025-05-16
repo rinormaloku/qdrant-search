@@ -54,6 +54,25 @@ To use this MCP server with Claude, add it to your MCP settings configuration fi
 }
 ```
 
+## Usage with Visual Studio Code
+
+To use this MCP server with Visual Studio Code, you can add it to your `mcp.json` configuration file. Below is an example configuration:
+
+```json
+{
+  "servers": {
+    "qdrantSearch": {
+      "command": "npx",
+      "args": ["qdrant-search-mcp-server"],
+      "env": {
+        "QDRANT_URL": "http://localhost:6333",
+        "QDRANT_API_KEY": "your_api_key_if_needed"
+      }
+    }
+  }
+}
+```
+
 #### qdrantSearch
 
 ```

@@ -1,4 +1,5 @@
 import { QueryResult } from "./types.js";
+import { QdrantClient } from "@qdrant/js-client-rest";
 
 const qdrantUrl = process.env.QDRANT_URL || "https://qdrant.is.solo.io";
 const qdrantApiKey = process.env.QDRANT_API_KEY;
@@ -8,7 +9,6 @@ let qdrantClient: any | null = null;
 export async function getQdrantClient(): Promise<any> {
   if (!qdrantClient) {
     try {
-      const { QdrantClient } = await import("@qdrant/js-client-rest");
       qdrantClient = new QdrantClient({
         url: qdrantUrl,
         apiKey: qdrantApiKey,

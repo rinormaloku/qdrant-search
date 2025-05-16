@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { createServer } from "./server.js";
 
 // Parse command line arguments for collections

@@ -1,6 +1,6 @@
 {
   "name": "qdrant-search-mcp-server",
-  "version": "0.1.1",
+  "version": "0.5.2",
   "description": "MCP server to search qdrant database",
   "type": "module",
   "main": "build/index.js",
