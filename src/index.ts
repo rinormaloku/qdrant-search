@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+// @ts-ignore
+process.noDeprecation = true;
+
 import { createServer } from "./server.js";
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';

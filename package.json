@@ -1,6 +1,6 @@
 {
   "name": "qdrant-search-mcp-server",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "MCP server to search qdrant database",
   "type": "module",
   "main": "build/index.js",
@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "tsc && chmod +x build/index.js",
-    "start": "node build/index.js",
+    "start": "node --no-deprecation build/index.js",
     "dev": "tsc -w",
     "clean": "rm -rf build",
     "prepare": "npm run build",
