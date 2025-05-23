@@ -9,10 +9,12 @@
   },
   "scripts": {
     "build": "tsc && chmod +x build/index.js",
-    "start": "node --no-deprecation build/index.js",
-    "dev": "tsc -w",
+    "start": "tsx src/index.ts",
     "clean": "rm -rf build",
     "prepare": "npm run build",
+    "docker:build-and-push": "npm run docker:build && npm run docker:push",
+    "docker:build": "docker build -t gcr.io/product-excellence-424719/search-docs-mcp-server:0.1 .",
+    "docker:push": "docker push gcr.io/product-excellence-424719/search-docs-mcp-server:0.1",
     "test": "echo \"No tests yet\""
   },
   "keywords": [
@@ -29,7 +31,8 @@
     "@qdrant/js-client-rest": "^1.14.0",
     "fastmcp": "^1.27.6",
     "openai": "^4.98.0",
-    "yargs": "^17.7.2"
+    "yargs": "^17.7.2",
+    "zod": "^3.22.4"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -48,6 +51,8 @@
   },
   "homepage": "https://github.com/rinormaloku/qdrant-search#readme",
   "devDependencies": {
-    "@types/yargs": "^17.0.33"
+    "@types/yargs": "^17.0.33",
+    "tsx": "^4.19.4",
+    "typescript": "^5.0.0"
   }
 }

@@ -29,7 +29,12 @@ const server = createServer({
   collections,
   name,
   description,
-  transportType: "stdio",
 });
 
-server.start();
+server.start({
+  sse: {
+    endpoint: "/sse",
+    port: 8080,
+  },
+  transportType: "sse",
+});

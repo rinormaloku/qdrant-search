@@ -7,8 +7,6 @@ import { createQdrantCollectionsEnum } from "./collections.js";
 
 interface ServerOptions {
   collections: string[];
-  transportType?: "stdio" | "http";
-  port?: number;
   name?: string;
   description?: string;
 }
