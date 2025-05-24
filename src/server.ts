@@ -16,6 +16,12 @@ export function createServer(options: ServerOptions = {collections: []}) {
   const server = new FastMCP({
     name: "QdrantSearch Server",
     version: "1.0.0",
+    health: {
+      enabled: true,
+      message: "healthy",
+      path: "/healthz",
+      status: 200,
+    },
   });
 
   server.addTool({

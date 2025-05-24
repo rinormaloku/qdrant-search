@@ -11,14 +11,17 @@ const argv = yargs(hideBin(process.argv))
   .option('collections', {
     type: 'string',
     description: 'Comma-separated list of collections to search',
+    default: process.env.COLLECTIONS,
   })
   .option('name', {
     type: 'string',
     description: 'Name for the MCP tool',
+    default: process.env.TOOL_NAME,
   })
   .option('description', {
     type: 'string',
     description: 'Description for the MCP tool',
+    default: process.env.TOOL_DESCRIPTION,
   })
   .parseSync();
 
@@ -32,9 +35,8 @@ const server = createServer({
 });
 
 server.start({
-  sse: {
-    endpoint: "/sse",
+  httpStream: {
     port: 8080,
   },
-  transportType: "sse",
+  transportType: "httpStream",
 });

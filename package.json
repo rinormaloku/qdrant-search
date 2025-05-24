@@ -29,7 +29,7 @@
   "license": "MIT",
   "dependencies": {
     "@qdrant/js-client-rest": "^1.14.0",
-    "fastmcp": "^1.27.6",
+    "fastmcp": "^2.1.2",
     "openai": "^4.98.0",
     "yargs": "^17.7.2",
     "zod": "^3.22.4"
